@@ -6,9 +6,10 @@ def main():
     num_words = get_word_count(words)
     char_dict  = get_character_count(words)
     char_report = get_list_of_dicts(char_dict)
-    print(f"--- begin report of {path} ---")
-    print(f"{num_words} words found in document")
-    print(f"Char_report: {char_report.sort(reverse=True, key=sort_on)}")
+    print(f"--- begin report of {path} ---\n\n")
+    print(f"{num_words} words found in document\n\n")
+    print_report(char_report)
+    print(f"\n\n--- end report ---")
     
 
 def get_words(path):
@@ -43,8 +44,16 @@ def get_list_of_dicts(dict: dict[str, int]) -> list:
     for k in dict:
         if k.isalpha():
             new_dict = {"char": k, "count": dict[k]}
-            list_of_dicts.append(new_dict)
+            list_of_dicts.append(new_dict)    
     return list_of_dicts
 
+def print_report(report: list):
+    if __name__ == "__main__":
+        report.sort(reverse=True, key=sort_on)
+        for dict in report:
+                char = dict.get("char")
+                count = dict.get("count")
+                string = f"The {char} was found {count} times"
+                print(string)
 
 main()
